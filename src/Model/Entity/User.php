@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
+use Authentication\IdentityInterface;
 
 /**
  * User Entity
@@ -50,4 +51,5 @@ class User extends Entity
             return (new DefaultPasswordHasher())->hash($password);
         }
     }
+
 }

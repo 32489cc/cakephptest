@@ -43,7 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div class="top-nav-links">
             <?php if($this->request->getSession()->read('Auth')) : ?>
                 <?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?>
-                <?=$this->Html->link(__('Download'), ['controller' => 'Users', 'action' => 'download'])?>
+                //<?=$this->Html->link(__('home'), ['controller' => 'Users', 'action' => 'index'])?>
             <?php endif; ?>
             <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
             <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
