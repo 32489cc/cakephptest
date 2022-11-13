@@ -16,6 +16,8 @@ use Authentication\IdentityInterface;
  * @property string $role
  * @property \Cake\I18n\FrozenDate|null $created
  * @property \Cake\I18n\FrozenDate|null $modified
+ *
+ * @property \App\Model\Entity\Roster[] $rosters
  */
 class User extends Entity
 {

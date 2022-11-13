@@ -11,6 +11,7 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
  * Users Model
+ *@property \App\Model\Table\UsersTable&\Cake\ORM\Association\hasmany $Rosters
  *
  * @method \App\Model\Entity\User newEmptyEntity()
  * @method \App\Model\Entity\User newEntity(array $data, array $options = [])
@@ -47,6 +48,11 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Rosters', [
+            'foreignKey' => 'id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**

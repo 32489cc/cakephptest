@@ -54,7 +54,7 @@ class UsersController extends AppController
     public function index()
     {
         $data=$this->request->getAttribute('identity');
-
+         debug($this->Users->find()->where(['id'=> $data->get('id')])->contain(['Rosters'])->toArray());
         $users=$this->Users->find()->where(['id'=> $data->get('id')]);
 
         $users = $this->paginate($users);
