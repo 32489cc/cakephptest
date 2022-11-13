@@ -34,7 +34,7 @@ class UsersController extends AdminController
     public function index()
     {
 
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($this->Users->find()->whereNotNull('tel'));
 
         $this->set(compact('users'));
     }

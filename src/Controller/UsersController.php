@@ -53,7 +53,11 @@ class UsersController extends AppController
     }
     public function index()
     {
-        $users = $this->paginate($this->Users);
+        $data=$this->request->getAttribute('identity');
+
+        $users=$this->Users->find()->where(['id'=> $data->get('id')]);
+
+        $users = $this->paginate($users);
 
         $this->set(compact('users'));
     }
