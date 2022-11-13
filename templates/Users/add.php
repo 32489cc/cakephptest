@@ -4,6 +4,13 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+<style>
+    .error{
+        color: red;
+        font-weight: bold;
+        margin: 1px 1px;
+    }
+</style>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
@@ -21,6 +28,10 @@
                     echo $this->Form->control('password');
                     echo $this->Form->control('role');
                 ?>
+                <?php
+                    echo $this->Form->control('tel',['error' => false]);
+                ?>
+                <div class="error"><?= $this->Form->error('tel') ?> </div>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>

@@ -14,6 +14,7 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('username') ?></th>
                     <th><?= $this->Paginator->sort('role') ?></th>
+                    <th><?= $this->Paginator->sort('tel') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -25,6 +26,7 @@
                     <td><?= $this->Number->format($user->id) ?></td>
                     <td><?= h($user->username) ?></td>
                     <td><?= h($user->role) ?></td>
+                    <td><?= h($user->tel) ?></td>
                     <td><?= h(date("Y年m月d日 H:i:s", strtotime($user->created) ))?></td>
                     <td><?= h($user->modified) ?></td>
                     <td class="actions">

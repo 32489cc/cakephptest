@@ -56,6 +56,9 @@ return static function (RouteBuilder $routes) {
          * ...and connect the rest of 'Pages' controller's URLs.
          */
         $builder->connect('/pages/*', 'Pages::display');
+        $builder->connect('/management/vip/:id',['controller' => 'Users', 'action' => 'view'])
+            ->setPatterns(['id'=>'\d+'])
+            ->setPass(['id']);
 
         /*
          * Connect catchall routes for all controllers.

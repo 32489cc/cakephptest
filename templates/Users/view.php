@@ -31,6 +31,10 @@
                     <td><?= $this->Number->format($user->id) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Tel') ?></th>
+                    <td><?= $this->Number->format($user->tel) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Created') ?></th>
                     <td><?= h($user->created->format('YYYY年mm月mm日')) ?></td>
                 </tr>

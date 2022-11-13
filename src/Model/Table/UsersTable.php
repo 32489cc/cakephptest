@@ -74,7 +74,10 @@ class UsersTable extends Table
             ->maxLength('role', 20)
             ->requirePresence('role', 'create')
             ->notEmptyString('role');
-
+        $validator
+            ->scalar('tel')
+            ->maxLength('tel', 20)
+            ->numeric('tel','数字以外入力禁止');
         return $validator;
     }
 
