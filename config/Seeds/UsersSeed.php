@@ -23,17 +23,18 @@ class UsersSeed extends AbstractSeed
 
      {
          $datetime = date('Y-m-d H:i:s');
-         $data = [
-
-             'username' => 'gong',
+         for($i=0;$i<5;$i++){
+             $data = [
+             'username' => 'gong' .$i,
              'password' => $this->_setPassword('123456'),
-             'role' => '1',
+             'role' => $i,
              'created' => $datetime,
              'modified' => $datetime,
          ];
+             $table = $this->table('users');
+             $table->insert($data)->save();
+             }
 
-         $table = $this->table('users');
-         $table->insert($data)->save();
      }
     protected function _setPassword($value)
     {

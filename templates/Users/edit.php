@@ -30,9 +30,13 @@
                 <legend><?= __('Edit User') ?></legend>
                 <?php
                     echo $this->Form->control('username');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('role');
-                    echo $this->Form->control('tel');
+                    echo $this->Form->control('password',['error' => false]);
+                    ?>
+                <div class="error"><?= $this->Form->error('password') ?> </div>
+                <?php
+                  echo $this->Form->control('password_confirm',['type'=> 'password']);
+                  echo $this->Form->control('role');
+                    echo $this->Form->control('tel',['default'=>$user->tel]);
                 ?>
                 <div class="error"><?=$this->Form->error('tel') ?> </div>
             </fieldset>

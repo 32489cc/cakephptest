@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\Event\EventInterface;
 use Exception;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Users Controller
@@ -54,7 +55,7 @@ class UsersController extends AppController
     public function index()
     {
         $data=$this->request->getAttribute('identity');
-         debug($this->Users->find()->where(['id'=> $data->get('id')])->contain(['Rosters'])->toArray());
+         //debug($this->Users->find()->where(['id'=> $data->get('id')])->contain(['Rosters'])->toArray());
         $users=$this->Users->find()->where(['id'=> $data->get('id')]);
 
         $users = $this->paginate($users);
@@ -87,7 +88,8 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user = $this->Users->patchEntity($user, $this->request->getData(),['validate'=>'Add']);
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -115,7 +117,6 @@ public function editInClosure($id){
     $user = $this->Users->get($id, [
         'contain' => [],
     ]);
-
     if ($this->request->is(['patch', 'post', 'put'])) {
         //saveを行う処理をクロージャにいれる
         //無名関数は外部の変数を利用する時、以下のように書いてます
@@ -130,10 +131,12 @@ public function editInClosure($id){
             $userChangeLog->created_user =  $this->request->getAttribute('username');
 
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
             $userChangeLog->after_value = serialize($user);
 
             // ユーザーデータの保存
             if ($this->Users->save($user)) {
+
                 $this->Flash->success(__('ユーザーを保存しました。'));
             } else {
                 throw new Exception('ユーザーが保存できませんでした。');

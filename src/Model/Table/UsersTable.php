@@ -50,7 +50,7 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->hasMany('Rosters', [
-            'foreignKey' => 'id',
+            'foreignKey' => 'users_id', //這裏的外鍵寫的是hasmany的table的外鍵
             'joinType' => 'INNER',
         ]);
     }
@@ -73,7 +73,16 @@ class UsersTable extends Table
             ->scalar('password')
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password')
+            ->add('password',[  //←バリデーション対象カラム
+                'comWith' => [  //←任意のバリデーション名
+                   'rule' => ['compareWith','password_confirm'],
+                    //←バリデーションのルール
+                    'on' =>['edit'],
+                    'message' => '確認用のパスワードと一致しません'  //←エラー時のメッセージ
+                ]
+            ])
+        ;
 
         $validator
             ->scalar('role')
@@ -100,4 +109,32 @@ class UsersTable extends Table
 
         return $rules;
     }
+    public function validationAdd(Validator $validator): Validator
+    {
+        $validator
+            ->scalar('username')
+            ->maxLength('username', 50)
+            ->requirePresence('username', 'create')
+            ->notEmptyString('username');
+
+        $validator
+            ->scalar('password')
+            ->maxLength('password', 255)
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password')
+
+        ;
+
+        $validator
+            ->scalar('role')
+            ->maxLength('role', 20)
+            ->requirePresence('role', 'create')
+            ->notEmptyString('role');
+        $validator
+            ->scalar('tel')
+            ->maxLength('tel', 20)
+            ->numeric('tel','数字以外入力禁止');
+        return $validator;
+    }
+
 }
